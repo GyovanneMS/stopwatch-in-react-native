@@ -1,13 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect} from 'Rreact';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+
+  const [tempo, definirTempo] = useState(120)
+
+  useEffect(function() {
+    const temporizador = tempo > 0 && setInterval(function(){
+      definirTempo(tempo - 1)
+    }, 1001)
+    return function() {
+      clearInterval(temporizador)
+    }
+  },[tempo])
+
+  return <View>
+      <StatusBar barStyle="light-content" backgroundColor="#1C2229"/>
     </View>
-  );
+
 }
 
 const styles = StyleSheet.create({
